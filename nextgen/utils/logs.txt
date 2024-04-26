@@ -1,0 +1,35 @@
+════════════════════════════════════════
+FILE SYSTEM: NEXTGEN
+CREATED BY: CHORU OFFICIAL
+FB: https://www.facebook.com/profile.php?id=100088806220727
+TIKTOK: tiktok.com/@choruofficial91
+TWITTER: https://twitter.com/Choru_user?t=Dh9T37LxAXdWjUy06hQwwg&s=09
+REPLIT: https://replit.com/@EDUCATION-JOHNSTEVE
+════════════════════════════════════════
+WAIT 10 SECOUND TO START BOT
+Thank you when I use the botpack file I hope you enjoy it don't worry 5 months will be auto update your files and no need to refork file because will be auto updates
+
+[ SYSTEM ] » Found file config: config.json
+[ SYSTEM ] » Config Loaded!
+[ SYSTEM ] » Found file appstate
+[ DATABASE ] » Connected to database successfully!
+[ DATABASE ] Logged in as 61558644926260
+[ DATABASE ] » Account's message region: PRN
+[ DATABASE ] » Done logging in
+[ =                   ] \ Cmd: admin
+[ ==                  ] \ Cmd: ai
+[ ====                ] \ Cmd: botId
+[ =====               ] \ Cmd: none
+[ =======              ] \ Cmd: chords
+[ ========            ] \ Cmd: element
+[ ==========           ] \ Cmd: fbid
+[ ===========         ] \ Cmd: getcookie
+[ ============        ] \ Cmd: gettoken
+[ ==============      ] \ Cmd: github
+[ ===============     ] \ Cmd: idioms
+[ =================    ] \ Cmd: leave
+[ ==================  ] \ Cmd: replit
+[ ==================== ] \ Cmd: test
+[ ==========           ] \ Event: joinNoti
+[ ==================== ] \ Event: Leavenoti
+[ SYSTEM ] » Installed 14 module commands and 2 module events successfully 

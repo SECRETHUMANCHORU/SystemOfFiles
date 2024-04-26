@@ -1,0 +1,41 @@
+{
+    "language": "en",
+    "DeveloperMode": "false",
+    "autoCreateDB": "true",
+    "allowInbox": "true",
+    "autoClean": "false",
+    "BOTNAME": "Nextgen",
+    "PREFIX": "/",
+    "version": "none",
+    "commandDisabled": [
+        "example.js"
+    ],
+    "eventDisabled": [],
+    "ADMINBOT": [
+        "100088806220727",
+        "100088334332155",
+        "100090829542977",
+        "100017375410153"
+    ],
+    "OWNER": "100088806220727",
+    "DATABASE": {
+        "sqlite": {
+            "storage": "data.sqlite"
+        }
+    },
+    "FCAOption": {
+        "forceLogin": "false",
+        "listenEvents": "true",
+        "autoMarkDelivery": "true",
+        "autoMarkRead": "true",
+        "logLevel": "error",
+        "selfListen": "true",
+        "online": "true",
+        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_2) AppleWebKit/600.3.18 (KHTML, like Gecko) Version/8.0.3 Safari/600.3.18"
+    },
+    "adminNoti": {
+        "autoUnsend": true,
+        "sendNoti": true,
+        "timeToUnsend": 10
+    }
+}
