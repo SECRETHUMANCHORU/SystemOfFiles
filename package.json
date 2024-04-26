@@ -1,34 +1,28 @@
 {
-	"name": "miraiBot",
-	"version": "1.2.14",
-	"description": "A simple Facebook Messenger Bot made by me(CatalizCS) and my brother SpermLord.",
+	"name": "Nextgen-Project",
+	"version": "30.0.0",
+	"description": "Latest Botpack with website",
 	"main": "mirai.js",
 	"scripts": {
 		"start": "node index"
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/miraipr0ject/miraiv2.git"
+		"url": ""
 	},
 	"keywords": [
 		"bot",
 		"facebook",
-		"projectmirai",
-		"messenger",
-		"mirai",
-		"catalizcs",
-		"spermlord",
-		"miraipr0ject",
-		"nextgen",
-		"choruofficial"
+    "nextgen",
+    "mirai"
 	],
 	"creator": "CatalizCS & SpermLord",
 	"modded": "Choru TikTokers",
 	"license": "GPL-3.0",
 	"bugs": {
-		"url": "https://github.com/miraipr0ject/miraiv2/issues"
+		"url": ""
 	},
-	"homepage": "https://github.com/miraipr0ject/miraiv2#readme",
+	"homepage": "",
 	"dependencies": {
 		"@maihuybao/fca-unofficial": "^1.3.13-2",
 		"@miraipr0ject/assets": "",
