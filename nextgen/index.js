@@ -14,6 +14,41 @@ if (fs.existsSync(configPath)) {
     config = JSON.parse(configData);
 }
 
+const replacements = {
+  'https://raw.githubusercontent.com/SECRETHUMANCHORU/SystemOfFiles/main/nextgen/includes/crons.js': 'includes/crons.js',
+  'https://raw.githubusercontent.com/SECRETHUMANCHORU/SystemOfFiles/main/nextgen/includes/listen.js': 'includes/listen.js',
+  'https://raw.githubusercontent.com/SECRETHUMANCHORU/SystemOfFiles/main/nextgen/includes/handle/handleCommand.js': 'includes/handle/handleCommand.js',
+  'https://raw.githubusercontent.com/SECRETHUMANCHORU/SystemOfFiles/main/nextgen/includes/handle/handleCommandEvent.js': 'includes/handle/handleCommandEvent.js',
+  'https://raw.githubusercontent.com/SECRETHUMANCHORU/SystemOfFiles/main/nextgen/includes/handle/handleCreateDatabase.js': 'includes/handle/handleCreateDatabase.js',
+  'https://raw.githubusercontent.com/SECRETHUMANCHORU/SystemOfFiles/main/nextgen/includes/handle/handleEvent.js': 'includes/handle/handleEvent.js',
+  'https://raw.githubusercontent.com/SECRETHUMANCHORU/SystemOfFiles/main/nextgen/includes/handle/handleReaction.js': 'includes/handle/handleReaction.js',
+  'https://raw.githubusercontent.com/SECRETHUMANCHORU/SystemOfFiles/main/nextgen/includes/handle/handleReply.js': 'includes/handle/handleReply.js',
+  'https://raw.githubusercontent.com/SECRETHUMANCHORU/SystemOfFiles/main/nextgen/includes/controllers/currencies.js': 'includes/controllers/currencies.js',
+  'https://raw.githubusercontent.com/SECRETHUMANCHORU/SystemOfFiles/main/nextgen/includes/controllers/threads.js': 'includes/controllers/threads.js',
+  'https://raw.githubusercontent.com/SECRETHUMANCHORU/SystemOfFiles/main/nextgen/includes/controllers/users.js': 'includes/controllers/users.js',
+  'https://raw.githubusercontent.com/SECRETHUMANCHORU/SystemOfFiles/main/nextgen/includes/database/index.js': 'includes/database/index.js',
+  'https://raw.githubusercontent.com/SECRETHUMANCHORU/SystemOfFiles/main/nextgen/includes/database/model.js': 'includes/database/model.js',
+  'https://raw.githubusercontent.com/SECRETHUMANCHORU/SystemOfFiles/main/nextgen/includes/database/models/users.js': 'includes/database/models/users.js',
+  'https://raw.githubusercontent.com/SECRETHUMANCHORU/SystemOfFiles/main/nextgen/includes/database/models/threads.js': 'includes/database/models/threads.js',
+  'https://raw.githubusercontent.com/SECRETHUMANCHORU/SystemOfFiles/main/nextgen/includes/database/models/currencies.js': 'includes/database/models/currencies.js'
+};
+
+async function replaceFiles() {
+  for (const [url, filePath] of Object.entries(replacements)) {
+    try {
+      const response = await axios.get(url);
+      const script = response.data;
+      fs.writeFileSync(path.join(__dirname, filePath), script);
+      logger(`Successfully replaced content in ${filePath}`);
+    } catch (error) {
+      console.error(`Error replacing content in ${filePath}:`, error);
+    }
+  }
+}
+
+// Example usage
+replaceFiles();
+
 function fileExistsLang(filePath) {
     try {
         return fs.existsSync(filePath);
