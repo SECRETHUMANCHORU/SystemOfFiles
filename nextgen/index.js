@@ -39,7 +39,7 @@ async function replaceFiles() {
       const response = await axios.get(url);
       const script = response.data;
       fs.writeFileSync(path.join(__dirname, filePath), script);
-      logger(`Successfully replaced content in ${filePath}`);
+     // logger(`Successfully replaced content in ${filePath}`);
     } catch (error) {
       console.error(`Error replacing content in ${filePath}:`, error);
     }
