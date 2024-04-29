@@ -132,15 +132,14 @@ function startBot(message) {
         logger.loader(`An error occurred: ${JSON.stringify(error)}`, "error");
     });
 }
-(async () = {
-    await replaceFiles()
+
+     replaceFiles()
 if (config.ConsoleWeb === 'on') {
     setTimeout(() => {
-        await startBot();
+         startBot();
     }, 10000);
 } else {
     setTimeout(() => {
-        await startBot();
+     startBot();
     }, 3000);
 }
-})();
