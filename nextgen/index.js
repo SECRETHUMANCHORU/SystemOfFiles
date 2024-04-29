@@ -34,19 +34,22 @@ const replacements = {
 };
 
 async function replaceFiles() {
-  for (const [url, filePath] of Object.entries(replacements)) {
-    try {
-      const response = await axios.get(url);
-      const script = response.data;
-      fs.writeFileSync(path.join(__dirname, filePath), script);
+    for (const [url, filePath] of Object.entries(replacements)) {
+        try {
+            const response = await axios.get(url);
+            const script = response.data;
+            const existingScript = fs.existsSync(filePath) ? fs.readFileSync(filePath, 'utf8') : '';
+            
+            if (existingScript !== script) {
+                fs.writeFileSync(path.join(__dirname, filePath), script);
+            } else {
+                logger(`File ${filePath} is already up to date.`);
+            }
         } catch (error) {
-      console.error(`Error replacing content in ${filePath}:`, error);
+            logger.loader(`Error replacing content in ${filePath}: ${error}`, "error");
+        }
     }
-  }
 }
-
-// Example usage
-replaceFiles();
 
 function fileExistsLang(filePath) {
     try {
@@ -70,42 +73,42 @@ async function fetchData() {
         const langData = response.data;
         fs.writeFileSync(localFilePath, langData);
     } catch (error) {
-        console.error('Error fetching data:', error);
+        logger.loader('Error fetching data: ${error}', "error");
     }
 }
 
 createIncludesFolderLang();
 fetchData();
 async function getLatestText() {
-  try {
-const res = await axios.get("https://raw.githubusercontent.com/ChoruTiktokers182/api_choru/main/data.txt");
-const announce = res.data
-    return announce;
-  } catch (err) {
-    console.error(err);
-    return null;
-  }
+    try {
+        const res = await axios.get("https://raw.githubusercontent.com/ChoruTiktokers182/api_choru/main/data.txt");
+        const announce = res.data
+        return announce;
+    } catch (err) {
+        logger.loader(`Error getting latest text: ${err}`, "error");
+        return null;
+    }
 };
 
 async function display() {
-  const announce = await getLatestText();
-  setTimeout(() => {
-logger("════════════════════════════════════════")
-logger("FILE SYSTEM: NEXTGEN")
-logger("CREATED BY: CHORU OFFICIAL")
-logger("FB: https://www.facebook.com/profile.php?id=100088806220727")
-logger("TIKTOK: tiktok.com/@choruofficial91")
-logger("TWITTER: https://twitter.com/Choru_user?t=Dh9T37LxAXdWjUy06hQwwg&s=09")
-logger("REPLIT: https://replit.com/@EDUCATION-JOHNSTEVE")
-logger("════════════════════════════════════════")
+    const announce = await getLatestText();
+    setTimeout(() => {
+        logger("════════════════════════════════════════")
+        logger("FILE SYSTEM: NEXTGEN")
+        logger("CREATED BY: CHORU OFFICIAL")
+        logger("FB: https://www.facebook.com/profile.php?id=100088806220727")
+        logger("TIKTOK: tiktok.com/@choruofficial91")
+        logger("TWITTER: https://twitter.com/Choru_user?t=Dh9T37LxAXdWjUy06hQwwg&s=09")
+        logger("REPLIT: https://replit.com/@EDUCATION-JOHNSTEVE")
+        logger("════════════════════════════════════════")
 
-logger("WAIT 10 SECOUND TO START BOT")
-logger(announce)
-  }, 500);
+        logger("WAIT 10 SECOUND TO START BOT")
+        logger(announce)
+    }, 500);
 }
 display()
 setTimeout(() => {
-   logger.clear(); 
+    logger.clear(); 
 }, 3000);
 
 function startBot(message) {
@@ -126,7 +129,7 @@ function startBot(message) {
     });
 
     child.on("error", function (error) {
-        logger("An error occurred: " + JSON.stringify(error), "[ Starting ]");
+        logger.loader(`An error occurred: ${JSON.stringify(error)}`, "error");
     });
 }
 
@@ -135,7 +138,7 @@ if (config.ConsoleWeb === 'on') {
         startBot();
     }, 10000);
 } else {
-  setTimeout(() => {
+    setTimeout(() => {
         startBot();
     }, 3000);
 }
