@@ -1,7 +1,7 @@
 const Sequelize = require("sequelize");
 const { resolve } = require("path");
 const { DATABASE } = global.config;
-
+//nyawa
 var dialect = Object.keys(DATABASE), storage;
 dialect = dialect[0]; 
 storage = resolve(__dirname, `../${DATABASE[dialect].storage}`);
