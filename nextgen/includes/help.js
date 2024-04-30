@@ -1,62 +1,104 @@
-module.exports.config = {
-	name: "infv2",
-	version: "30.0.0", 
-	hasPermssion: 0,
-	credits: "VEGITO OFFICIAL",
-  //secondcredit: "Choru tiktokers"
-	description: "Admin and Bot info.",
-	commandCategory: "...",
-	cooldowns: 1,
-	dependencies: 
-	{
-    "request":"",
-    "fs-extra":"",
-    "axios":""
+ module.exports.config = {
+  name: "help",
+  version: "30.0.0",
+  hasPermssion: 0,
+  credits: "PetterSever",
+  description: "Beginner's Guide",
+  commandCategory: "system",
+  usages: "[Tên module]",
+  cooldowns: 1,
+  envConfig: {
+    autoUnsend: true,
+    delayUnsend: 300
   }
 };
-module.exports.run = async function({ api,event,args,client,Users,Threads,__GLOBAL,Currencies }) {
-const axios = global.nodemodule["axios"];
-const request = global.nodemodule["request"];
-const fs = global.nodemodule["fs-extra"];
-const time = process.uptime(),
-		hours = Math.floor(time / (60 * 60)),
-		minutes = Math.floor((time % (60 * 60)) / 60),
-		seconds = Math.floor(time % 60);
-const moment = require("moment-timezone");
-var Vegito = moment.tz("Asia/Manila").format("『D/MM/YYYY』 【HH:mm:ss】");
-var link = [`${global.config.infv2forlinkpic}`,`${global.config.infv2forlinkpicv2}`,`${global.config.infv2forlinkpicv3}`,`${global.config.infv2forlinkpicv4}`,`${global.config.infv2forlinkpicv5}`];
-/*FIXING API MESSANGE*/
-var callback = () => api.sendMessage({body:`➢Admin and Bot information
-⁂Bot Name: ${global.config.BOTNAME}
-✧Bot Admin: ${global.config.OWNER}, ${global.config.BOTNAME}
-${global.config.OWNER}: ${global.config.FACEBOOK}
-✡Bot Prefix: ${global.config.PREFIX}
-✫Bot Owner: ${global.config.OWNER}
-➟UPTIME
-✬Today is: ${Vegito} 
-➳Bot is running ${hours}:${minutes}:${seconds}.
-LIST OFF OR ON CRON SCHEDULE
-[
-AutoOffBot: ${global.config.AutoOffBot}
-AutoGreet: ${global.config.AutoGreet}
-AutoGreetWithSticker: ${global.config.AutoGreetWithSticker}
-AutoPost: ${global.config.AutoPost}
-AutoPostGreet: ${global.config.AutoPostGreet}
-AutoPostChristmasCountdown: ${global.config.AutoPostChristmasCountdown}
-HolidayAutoGreet: ${global.config.HolidayAutoGreet}
-ChristmasCountdown: ${global.config.ChristmasCountdown}
-AcceptFriendRequest: ${global.config.AcceptFriendRequest}
-AutoPendingGroupChat: ${global.config.AutoPendingGroupChat}
-AutoBioStatus: ${global.config.AutoBioStatus}
-AutoLeave ${global.config.AutoLeave}
-Anifactrandom: ${global.config.Anifactrandom}
-trivirandom: ${global.config.trivirandom}
-]
-LIST CONFIG.JSON
-Permission: ${global.config.Permission}
-Permission: ${global.config.Permissionv2}
-Read: [ ${global.config.Read} ]
-Uptimelogs: ${global.config.Uptimelogs}
-✫Thanks for using ${global.config.BOTNAME} Bot!`,attachment: fs.createReadStream(__dirname + "/cache/Vegito.jpg")}, event.threadID, () => fs.unlinkSync(__dirname + "/cache/Vegito.jpg")); 
-      return request(encodeURI(link[Math.floor(Math.random() * link.length)])).pipe(fs.createWriteStream(__dirname+"/cache/Vegito.jpg")).on("close",() => callback());
-   };
+//
+module.exports.languages = {
+  //"vi": {
+  //	"moduleInfo": "「 %1 」\n%2\n\n❯ Cách sử dụng: %3\n❯ Thuộc nhóm: %4\n❯ Thời gian chờ: %5 giây(s)\n❯ Quyền hạn: %6\n\n» Module code by %7 «",
+  //	"helpList": '[ Hiện tại đang có %1 lệnh có thể sử dụng trên bot này, Sử dụng: "%2help nameCommand" để xem chi tiết cách sử dụng! ]"',
+  //	"user": "Người dùng",
+  //      "adminGroup": "Quản trị viên nhóm",
+  //      "adminBot": "Quản trị viên bot"
+//	},
+  "en": {
+    "moduleInfo": "『 %1 』\n%2\n\n❯ Usage: %3\n❯ Category: %4\n❯ Waiting time: %5 seconds(s)\n❯ Permission: %6\n\nModule code by %7",
+    "helpList": '[ There are %1 commands on this bot, Use: "%2help nameCommand" to know how to use! ]',
+    "user": "User",
+        "adminGroup": "Admin group",
+        "adminBot": "Admin bot"
+  }
+};
+
+module.exports.handleEvent = function ({ api, event, getText }) {
+  const { commands } = global.client;
+  const { threadID, messageID, body } = event;
+
+  if (!body || typeof body == "undefined" || body.indexOf("help") != 0) return;
+  const splitBody = body.slice(body.indexOf("help")).trim().split(/\s+/);
+  if (splitBody.length == 1 || !commands.has(splitBody[1].toLowerCase())) return;
+  const threadSetting = global.data.threadData.get(parseInt(threadID)) || {};
+  const command = commands.get(splitBody[1].toLowerCase());
+  const prefix = (threadSetting.hasOwnProperty("PREFIX")) ? threadSetting.PREFIX : global.config.PREFIX;
+  return api.sendMessage(getText("moduleInfo", command.config.name, command.config.description, `${prefix}${command.config.name} ${(command.config.usages) ? command.config.usages : ""}`, command.config.commandCategory, command.config.cooldowns, ((command.config.hasPermssion == 0) ? getText("user") : (command.config.hasPermssion == 1) ? getText("adminGroup") : getText("adminBot")), command.config.credits), threadID, messageID);
+}
+
+module.exports.run = function({ api, event, args, getText }) {
+  const { commands } = global.client;
+  const { threadID, messageID } = event;
+  const command = commands.get((args[0] || "").toLowerCase());
+  const threadSetting = global.data.threadData.get(parseInt(threadID)) || {};
+  const { autoUnsend, delayUnsend } = global.configModule[this.config.name];
+  const prefix = (threadSetting.hasOwnProperty("PREFIX")) ? threadSetting.PREFIX : global.config.PREFIX;
+  if (args.join().indexOf('all')== 0) {
+    const command = commands.values();
+    var group = [], msg = "";
+    for (const commandConfig of command) {
+      if (!group.some(item => item.group.toLowerCase() == commandConfig.config.commandCategory.toLowerCase())) group.push({ group: commandConfig.config.commandCategory.toLowerCase(), cmds: [commandConfig.config.name] });
+      else group.find(item => item.group.toLowerCase() == commandConfig.config.commandCategory.toLowerCase()).cmds.push(commandConfig.config.name);
+    }
+    group.forEach(commandGroup => msg += `『 ${commandGroup.group.charAt(0).toUpperCase() + commandGroup.group.slice(1)} 』\n${commandGroup.cmds.join(', ')}\n\n`);
+
+    const moduleName = this.config.name;
+    return api.sendMessage(msg + ``, event.threadID, (err, info) => {
+      setTimeout(() => {api.unsendMessage(info.messageID)}, 120000)
+    }, event.messageID);
+  }
+
+  if (!command) {
+    const arrayInfo = [];
+    const page = parseInt(args[0]) || 1;
+    const numberOfOnePage = 10;
+    //*số thứ tự 1 2 3.....cú pháp ${++i}*//
+    let i = 0;
+    let msg = "";
+
+    for (var [name, value] of (commands)) {
+      name += ``;
+      arrayInfo.push(name);
+    }
+
+    arrayInfo.sort((a, b) => a.data - b.data);
+
+    const startSlice = numberOfOnePage*page - numberOfOnePage;
+    i = startSlice;
+    const returnArray = arrayInfo.slice(startSlice, startSlice + numberOfOnePage);
+
+    for (let item of returnArray) msg += `『 ${i++} 』${prefix}${item} ❯ ${commands.get(item).config.usages}\n`;
+
+
+    const siu = `Commands List`;
+
+ const text = `\nPage (${page}/${Math.ceil(arrayInfo.length/numberOfOnePage)})\n\nYou can use ${global.config.PREFIX}help all to see all commands`;
+
+    return api.sendMessage(siu + "\n\n" + msg  + text, threadID, async (error, info) => {
+      if (autoUnsend) {
+        await new Promise(resolve => setTimeout(resolve, delayUnsend * 1000));
+        return api.unsendMessage(info.messageID);
+      } else return;
+    }, event.messageID);
+  }
+
+  return api.sendMessage(getText("moduleInfo", command.config.name, command.config.description, `${prefix}${command.config.name} ${(command.config.usages) ? command.config.usages : ""}`, command.config.commandCategory, command.config.cooldowns, ((command.config.hasPermssion == 0) ? getText("user") : (command.config.hasPermssion == 1) ? getText("adminGroup") : getText("adminBot")), command.config.credits), threadID, messageID);
+};
+																   
