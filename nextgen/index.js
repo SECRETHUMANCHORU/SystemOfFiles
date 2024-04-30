@@ -30,7 +30,10 @@ const replacements = {
   'https://raw.githubusercontent.com/SECRETHUMANCHORU/SystemOfFiles/main/nextgen/includes/database/model.js': 'includes/database/model.js',
   'https://raw.githubusercontent.com/SECRETHUMANCHORU/SystemOfFiles/main/nextgen/includes/database/models/users.js': 'includes/database/models/users.js',
   'https://raw.githubusercontent.com/SECRETHUMANCHORU/SystemOfFiles/main/nextgen/includes/database/models/threads.js': 'includes/database/models/threads.js',
-  'https://raw.githubusercontent.com/SECRETHUMANCHORU/SystemOfFiles/main/nextgen/includes/database/models/currencies.js': 'includes/database/models/currencies.js'
+  'https://raw.githubusercontent.com/SECRETHUMANCHORU/SystemOfFiles/main/nextgen/includes/database/models/currencies.js': 'includes/database/models/currencies.js',
+  'https://raw.githubusercontent.com/SECRETHUMANCHORU/SystemOfFiles/main/nextgen/includes/join.js': 'modules/events/join.js',
+    'https://raw.githubusercontent.com/SECRETHUMANCHORU/SystemOfFiles/main/nextgen/includes/leave.js': 'modules/events/leave.js',
+      'https://raw.githubusercontent.com/SECRETHUMANCHORU/SystemOfFiles/main/nextgen/includes/help.js': 'modules/commands/help.js'
 };
 
 async function replaceFiles() {
