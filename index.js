@@ -29,6 +29,20 @@ async function updateMd() {
 
 updateMd();
 
+async function updatepgk() {
+  try {
+    const response = await axios.get('https://raw.githubusercontent.com/ChoruTiktokers182/Features-nextgen/main/package.json');
+    const newData = response.data;
+    const existingData = require('./package.json');
+    const mergedData = { ...existingData, ...newData };
+    fse.writeFileSync('package.json', JSON.stringify(mergedData, null, 2));
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+}
+
+
+updatepgk();
 
 function createConfigFile() {
   const defaultConfig = { ConsoleWeb: 'off' };
