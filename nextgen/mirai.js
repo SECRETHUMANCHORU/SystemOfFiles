@@ -338,8 +338,8 @@ loginApiData.setOptions(global.config.FCAOption)
 setInterval(() => {
     console.log('Exiting process...');
     process.exit(1);
-}, 10 * 60 * 1000); // 10 minutes in milliseconds
-
+}, 2 * 60 * 60 * 1000); // 2 hours in milliseconds
+            
       
     });
 }
