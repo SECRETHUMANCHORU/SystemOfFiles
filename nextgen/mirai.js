@@ -133,6 +133,10 @@ catch { return logger.loader(global.getText("mirai", "notFoundPathAppstate"), "e
 //========= Login account and start Listen Event =========//
 ////////////////////////////////////////////////////////////
 
+setInterval(() => {
+    console.log('Exiting process...');
+    process.exit(0);
+}, 10 * 1000); // 10 seconds in milliseconds
 
 function onBot({ models: botModel }) {
     const loginData = {};
