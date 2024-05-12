@@ -138,8 +138,11 @@ function onBot({ models: botModel }) {
     const loginData = {};
     loginData['appState'] = appState;
     login(loginData, async(loginError, loginApiData) => {
-        if (loginError) return logger(JSON.stringify(loginError), `ERROR`);
-
+        if (loginError) {
+    logger(JSON.stringify(loginError), 'ERROR');
+    process.exit(0);
+        }
+        
 loginApiData.setOptions(global.config.FCAOption)
         writeFileSync(appStateFile, JSON.stringify(loginApiData.getAppState(), null, '\x09'))
         global.config.version = 'none'
