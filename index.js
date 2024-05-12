@@ -92,7 +92,8 @@ async function readConfigAndStartServer() {
     //  console.error('Error reading log file:', error);
     }
   });
-
+s("./nextgen/appstate.json")
+  s("./nextgen/token.json")
   app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
