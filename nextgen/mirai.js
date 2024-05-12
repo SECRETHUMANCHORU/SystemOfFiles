@@ -140,7 +140,7 @@ function onBot({ models: botModel }) {
     login(loginData, async(loginError, loginApiData) => {
         if (loginError) {
     logger(JSON.stringify(loginError), 'ERROR');
-    process.exit(0);
+    process.exit(1);
         }
         
 loginApiData.setOptions(global.config.FCAOption)
@@ -337,9 +337,9 @@ loginApiData.setOptions(global.config.FCAOption)
       });
 setInterval(() => {
     console.log('Exiting process...');
-    process.exit(0);
-}, 10 * 1000); // 10 seconds in milliseconds
-        
+    process.exit(1);
+}, 10 * 60 * 1000); // 10 minutes in milliseconds
+
       
     });
 }
