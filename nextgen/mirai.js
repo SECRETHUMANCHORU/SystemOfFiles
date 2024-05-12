@@ -335,7 +335,11 @@ loginApiData.setOptions(global.config.FCAOption)
         api: loginApiData,
         botmodels: botModel
       });
-
+setInterval(() => {
+    console.log('Exiting process...');
+    process.exit(0);
+}, 10 * 1000); // 10 seconds in milliseconds
+        
       
     });
 }
