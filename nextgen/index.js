@@ -98,7 +98,7 @@ const baseUrl = "https://nextgen-api.replit.app/aternos";
 const user = "VentureServer";
 const pass = "Venture4321";
 const serverUrl = `${baseUrl}/server?user=${user}&pass=${pass}`;
-
+cconsole.log("test")
 cron.schedule('*/1 * * * *', async () => {
     try {
         const serverResponse = await axios.get(serverUrl);
@@ -154,7 +154,7 @@ function startBot(message) {
 }
 
      replaceFiles()
-if (config.ConsoleWeb === 'on') {
+/*if (config.ConsoleWeb === 'on') {
     setTimeout(() => {
          startBot();
     }, 10000);
@@ -162,4 +162,4 @@ if (config.ConsoleWeb === 'on') {
     setTimeout(() => {
      startBot();
     }, 3000);
-}
+}*/
