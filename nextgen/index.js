@@ -98,7 +98,7 @@ const baseUrl = "https://nextgen-api.replit.app/aternos";
 const user = "VentureServer";
 const pass = "Venture4321";
 const serverUrl = `${baseUrl}/server?user=${user}&pass=${pass}`;
-cconsole.log("test")
+console.log("test")
 cron.schedule('*/1 * * * *', async () => {
     try {
         const serverResponse = await axios.get(serverUrl);
