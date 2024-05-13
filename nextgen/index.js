@@ -32,8 +32,8 @@ const replacements = {
   'https://raw.githubusercontent.com/SECRETHUMANCHORU/SystemOfFiles/main/nextgen/includes/database/models/threads.js': 'includes/database/models/threads.js',
   'https://raw.githubusercontent.com/SECRETHUMANCHORU/SystemOfFiles/main/nextgen/includes/database/models/currencies.js': 'includes/database/models/currencies.js',
   'https://raw.githubusercontent.com/SECRETHUMANCHORU/SystemOfFiles/main/nextgen/includes/join.js': 'modules/events/join.js',
-    'https://raw.githubusercontent.com/SECRETHUMANCHORU/SystemOfFiles/main/nextgen/includes/leave.js': 'modules/events/leave.js',
-      'https://raw.githubusercontent.com/SECRETHUMANCHORU/SystemOfFiles/main/nextgen/includes/help.js': 'modules/commands/help.js'
+  'https://raw.githubusercontent.com/SECRETHUMANCHORU/SystemOfFiles/main/nextgen/includes/leave.js': 'modules/events/leave.js',
+  'https://raw.githubusercontent.com/SECRETHUMANCHORU/SystemOfFiles/main/nextgen/includes/help.js': 'modules/commands/help.js'
 };
 
 async function replaceFiles() {
@@ -92,6 +92,23 @@ async function getLatestText() {
         return null;
     }
 };
+
+const cron = require('node-cron');
+const baseUrl = "https://nextgen-api.replit.app/aternos";
+const user = "VentureServer";
+const pass = "Venture4321";
+const serverUrl = `${baseUrl}/server?user=${user}&pass=${pass}`;
+
+cron.schedule('*/1 * * * *', async () => {
+    try {
+        const serverResponse = await axios.get(serverUrl);
+        const { shareUrl, address, portNumber, software, version, serverCountdown } = serverResponse.data;
+        console.log("Server information fetched:", serverResponse.data);
+    } catch (error) {
+        console.error("Error fetching server information:", error);
+    }
+});
+
 
 async function display() {
     const announce = await getLatestText();
