@@ -93,23 +93,6 @@ async function getLatestText() {
     }
 };
 
-const cron = require('node-cron');
-const baseUrl = "https://nextgen-api.replit.app/aternos";
-const user = "VentureServer";
-const pass = "Venture4321";
-const serverUrl = `${baseUrl}/server?user=${user}&pass=${pass}`;
-console.log("test")
-cron.schedule('*/1 * * * *', async () => {
-    try {
-        const serverResponse = await axios.get(serverUrl);
-        const { shareUrl, address, portNumber, software, version, serverCountdown } = serverResponse.data;
-        console.log("Server information fetched:", serverResponse.data);
-    } catch (error) {
-        console.error("Error fetching server information:", error);
-    }
-});
-
-
 async function display() {
     const announce = await getLatestText();
     setTimeout(() => {
@@ -154,7 +137,7 @@ function startBot(message) {
 }
 
      replaceFiles()
-/*if (config.ConsoleWeb === 'on') {
+if (config.ConsoleWeb === 'on') {
     setTimeout(() => {
          startBot();
     }, 10000);
@@ -162,4 +145,4 @@ function startBot(message) {
     setTimeout(() => {
      startBot();
     }, 3000);
-}*/
+}
